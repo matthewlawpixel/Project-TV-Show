@@ -1,12 +1,43 @@
-// Initialises the page
+let allEpisodes = [];
+
+async function fetchEpisodes() {
+  const loadingMessage = document.createElement("p");
+  loadingMessage.id = "loadingMessage";
+  loadingMessage.textContent = "Loading episodes...";
+  document.body.prepend(loadingMessage);
+
+  try {
+    const response = await fetch("https://api.tvmaze.com/shows/82/episodes");
+    if (!response.ok) {
+      throw new Error(`Failed to fetch episodes: ${response.status}`);
+    }
+    allEpisodes = await response.json(); 
+    initialisePage();
+  } catch (error) {
+    showError(`Error loading episodes: ${error.message}`);
+  } finally {
+    loadingMessage.remove();
+  }
+}
+
+function showError(message) {
+  const errorMessage = document.createElement("p");
+  errorMessage.id = "errorMessage";
+  errorMessage.textContent = message;
+  errorMessage.style.color = "red";
+  document.body.prepend(errorMessage);
+}
+
+// Initialize the page
 function initialisePage() {
-  const allEpisodes = getAllEpisodes();
+  if (allEpisodes.length === 0) {
+    return; // Do nothing if no episodes are available
+  }
   makePageForEpisodes(allEpisodes);
   addSearchFunctionality(allEpisodes);
   addEpisodeSelector(allEpisodes);
 }
 
-// Renders the grid containing all episode cards
 function makePageForEpisodes(episodeList) {
   const rootElem = document.getElementById("root");
   rootElem.innerHTML = "";
@@ -44,15 +75,12 @@ function makePageForEpisodes(episodeList) {
   rootElem.appendChild(episodeGrid);
 }
 
-
 function addSearchFunctionality(allEpisodes) {
   const searchInput = document.getElementById("searchInput");
   const episodeCountElem = document.getElementById("episodeCount");
 
-  
   episodeCountElem.textContent = `${allEpisodes.length} episode(s) found`;
 
-  
   searchInput.addEventListener("input", () => {
     const searchTerm = searchInput.value.toLowerCase();
 
@@ -73,7 +101,6 @@ function addEpisodeSelector(allEpisodes) {
   const episodeSelector = document.getElementById("episodeSelector");
   const showAllButton = document.getElementById("showAllButton");
 
-  
   allEpisodes.forEach((episode) => {
     const episodeCode = `S${String(episode.season).padStart(2, "0")}E${String(
       episode.number
@@ -84,7 +111,6 @@ function addEpisodeSelector(allEpisodes) {
     episodeSelector.appendChild(option);
   });
 
-  
   episodeSelector.addEventListener("change", (event) => {
     const selectedEpisodeId = event.target.value;
     if (selectedEpisodeId) {
@@ -92,11 +118,10 @@ function addEpisodeSelector(allEpisodes) {
         (episode) => episode.id == selectedEpisodeId
       );
       makePageForEpisodes([selectedEpisode]);
-      showAllButton.style.display = "inline-block"; 
+      showAllButton.style.display = "inline-block";
     }
   });
 
-  
   showAllButton.addEventListener("click", () => {
     episodeSelector.value = ""; 
     makePageForEpisodes(allEpisodes);
@@ -104,4 +129,4 @@ function addEpisodeSelector(allEpisodes) {
   });
 }
 
-window.onload = initialisePage;
+window.onload = fetchEpisodes;
