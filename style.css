@@ -4,6 +4,7 @@ body {
   padding: 0;
   background-color: #121212;
   color: #ffffff;
+  line-height: 1.5;
 }
 
 #root {
@@ -25,9 +26,7 @@ body {
   overflow: hidden;
   flex: 1 1 calc(25% - 20px);
   max-width: calc(25% - 20px);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  display: flex;
-  flex-direction: column;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .episode-card:hover {
@@ -59,7 +58,6 @@ body {
   margin: 0 0 10px;
   font-size: 14px;
   color: #b3b3b3;
-  line-height: 1.5;
 }
 
 .episode-content a {
