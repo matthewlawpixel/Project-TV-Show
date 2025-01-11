@@ -9,13 +9,28 @@
   </head>
 
   <body>
-    <div id="root">
+   
+    <div class="search-container">
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Search episodes..."
+      />
+      <p id="episodeCount">0 episode(s) found</p>
     </div>
 
-    <!-- Loads a provided function called getAllEpisodes() which returns all episodes -->
-    <script src="episodes.js"></script>
+   
+    <div class="episode-selector-container">
+      <label for="episodeSelector">Jump to episode:</label>
+      <select id="episodeSelector">
+        <option value="">Select an episode</option>
+      </select>
+      <button id="showAllButton" style="display: none;">Show All Episodes</button>
+    </div>
 
-    <!-- Loads YOUR javascript code -->
+    <div id="root"></div>
+
+    <script src="episodes.js"></script>
     <script src="script.js"></script>
   </body>
 </html>
