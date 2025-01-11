@@ -2,96 +2,63 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #121212;
-  color: #ffffff;
+  background-color: #f8f9fa;
+  color: #343a40;
 }
 
-#root {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-}
 
-.episode-grid {
-  display: flex;
-  flex-wrap: wrap;
+.episodes-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;
-  justify-content: space-between;
+  padding: 20px;
+  justify-content: center;
 }
 
 .episode-card {
-  background: #1c1c1c;
+  background: white;
+  border: 1px solid #ced4da;
   border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  flex: 1 1 calc(25% - 20px);
-  max-width: calc(25% - 20px);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  display: flex;
-  flex-direction: column;
-}
-
-.episode-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+  text-align: center;
+  padding: 15px;
+  max-width: 400px;
+  margin: 0 auto;
 }
 
 .episode-card img {
   width: 100%;
-  aspect-ratio: 16 / 9;
+  height: auto;
+  border-bottom: 1px solid #dee2e6;
+  max-height: 300px;
   object-fit: cover;
-  border-bottom: 1px solid #2a2a2a;
 }
 
-.episode-content {
-  padding: 15px;
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
+.episode-card h2 {
+  font-size: 20px;
+  margin: 10px 0;
 }
 
-.episode-content h2 {
-  font-size: 16px;
-  margin: 0 0 10px;
-  color: #ffffff;
-}
-
-.episode-content p {
-  margin: 0 0 10px;
+.episode-code {
   font-size: 14px;
-  color: #b3b3b3;
-  line-height: 1.5;
+  color: #6c757d;
 }
 
-.episode-content a {
+.episode-summary {
+  font-size: 14px;
+  margin: 10px 0;
+  color: #495057;
+}
+
+.episode-card a {
+  display: inline-block;
+  margin-top: 10px;
   text-decoration: none;
-  color: #1db954;
+  color: #007bff;
   font-weight: bold;
-  margin-top: auto;
 }
 
-.episode-content a:hover {
-  text-decoration: underline;
-}
-
-h1 {
-  font-size: 24px;
-  text-align: left;
-  margin-bottom: 20px;
-  color: #ffffff;
-}
-
-footer {
-  text-align: center;
-  margin-top: 30px;
-  font-size: 14px;
-  color: #b3b3b3;
-}
-
-footer a {
-  color: #1db954;
-  text-decoration: none;
-}
-
-footer a:hover {
+.episode-card a:hover {
   text-decoration: underline;
 }
