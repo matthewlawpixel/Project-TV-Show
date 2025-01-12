@@ -5,6 +5,8 @@ function setup() {
   addSearchFeature(allEpisodes); // Add live search functionality
   addEpisodeSelectorListener(allEpisodes); // Add event listener for episode selection
 }
+const FALLBACK_IMAGE = "placeholder.jpg";
+const NO_SUMMARY_TEXT = "No summary available.";
 
 function renderEpisodes(episodes) {
   const rootElem = document.getElementById("root");
@@ -50,7 +52,7 @@ function createEpisodeImage(episode) {
     img.src = episode.image.medium;
     img.alt = `Image of ${episode.name} - ${formatEpisodeCode(episode)}`;
   } else {
-    img.src = "placeholder.jpg"; // Fallback image
+    img.src = FALLBACK_IMAGE; 
     img.alt = "Image not available";
   }
   return img;
@@ -73,7 +75,7 @@ function createEpisodeCode(episode) {
 function createEpisodeSummary(episode) {
   const summary = document.createElement("p");
   summary.className = "episode-summary";
-  summary.innerHTML = episode.summary || "No summary available."; // Fallback for missing summary
+  summary.innerHTML = episode.summary || NO_SUMMARY_TEXT; 
   return summary;
 }
 
