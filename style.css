@@ -2,8 +2,14 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
+
   background-color: #f8f9fa;
   color: #343a40;
+
+  background-color: #121212;
+  color: #ffffff;
+  line-height: 1.5;
+
 }
 
 
@@ -21,10 +27,21 @@ body {
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   overflow: hidden;
+
   text-align: center;
   padding: 15px;
   max-width: 400px;
   margin: 0 auto;
+
+  flex: 1 1 calc(25% - 20px);
+  max-width: calc(25% - 20px);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.episode-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+
 }
 
 .episode-card img {
@@ -42,7 +59,11 @@ body {
 
 .episode-code {
   font-size: 14px;
+
   color: #6c757d;
+
+  color: #b3b3b3;
+
 }
 
 .episode-summary {
