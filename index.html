@@ -6,24 +6,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>TV Show Project</title>
   <link href="style.css" rel="stylesheet" />
-  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
 </head>
 
 <body>
-  <select id="show-selector">
-    <option value="">Select a Show</option>
-  </select>
-
-  <input id="search-bar" type="text" placeholder="Search episodes..." />
-
-  <select id="episode-selector">
-    <option value="">Show All Episodes</option>
-  </select>
-
-  <p id="results-count"></p>
-  <div id="root"></div>
-
+  <section id="shows-view">
+    <h1>TV Shows</h1>
+    <div id="search-controls">
+      <label for="shows-search-bar">Filtering for</label>
+      <input id="shows-search-bar" class="search" type="text" placeholder="Search shows by name, genre, summary..." />
+      <p id="shows-results-count"></p>
+      <select id="front-show-selector">
+        <option value="">Select a Show</option>
+      </select>
+    </div>
+    <div id="shows-container"></div>
+  </section>
+  <section id="episodes-view" style="display: none;">
+    <select id="show-selector">
+      <option value="">Select a Show</option>
+    </select>
+    <input id="search-bar" class="search" type="text" placeholder="Search episodes..." />
+    <select id="episode-selector">
+      <option value="">Show All Episodes</option>
+    </select>
+    <button id="back-to-shows-btn">Back to Shows</button>
+    <p id="results-count"></p>
+    <div id="root"></div>
+  </section>
   <script src="script.js"></script>
 </body>
-
 </html>
