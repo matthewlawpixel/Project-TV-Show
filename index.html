@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>TV Show Project</title>
-  <link href="style.css" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
@@ -22,14 +22,17 @@
     <div id="shows-container"></div>
   </section>
   <section id="episodes-view" style="display: none;">
-    <select id="show-selector">
-      <option value="">Select a Show</option>
-    </select>
-    <input id="search-bar" class="search" type="text" placeholder="Search episodes..." />
-    <select id="episode-selector">
-      <option value="">Show All Episodes</option>
-    </select>
-    <button id="back-to-shows-btn">Back to Shows</button>
+    <h1>TV Shows</h1>
+    <div id="episodes-controls">
+      <select id="show-selector">
+        <option value="">Select a Show</option>
+      </select>
+      <input id="search-bar" class="search" type="text" placeholder="Search episodes..." />
+      <select id="episode-selector">
+        <option value="">Show All Episodes</option>
+      </select>
+      <button id="back-to-shows-btn">Back to Shows</button>
+    </div>
     <p id="results-count"></p>
     <div id="root"></div>
   </section>

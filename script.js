@@ -3,6 +3,8 @@ const NO_SUMMARY_TEXT = "No summary available.";
 
 const showCache = {};
 
+let favoriteShows = JSON.parse(localStorage.getItem("favoriteShows")) || {};
+
 let currentEpisodes = [];
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -10,8 +12,9 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function initializeApp() {
-  setupNavigation();  
+  setupNavigation();
   setupEpisodesView();
+  addSortByRatingControl();
   loadShowsListing();
 }
 
@@ -69,14 +72,74 @@ function createShowCard(show) {
     <p><strong>Runtime:</strong> ${show.runtime || "N/A"}</p>
   `;
 
-  card.appendChild(img);
-  card.appendChild(title);
-  card.appendChild(summary);
-  card.appendChild(meta);
+  const favButton = document.createElement("button");
+  favButton.classList.add("fav-button");
+  const isFav = Boolean(favoriteShows[show.id]);
+  favButton.textContent = isFav ? "★ Favorite" : "☆ Favorite";
+  favButton.addEventListener("click", (e) => {
+    e.stopPropagation();
+    toggleFavorite(show, favButton);
+  });
 
   card.addEventListener("click", () => handleShowClick(show.id));
 
+  card.appendChild(img);
+  card.appendChild(title);
+  card.appendChild(favButton);
+  card.appendChild(summary);
+  card.appendChild(meta);
+
   return card;
+}
+
+function toggleFavorite(show, button) {
+  const isFav = Boolean(favoriteShows[show.id]);
+  if (isFav) {
+    delete favoriteShows[show.id];
+    button.textContent = "☆ Favorite";
+  } else {
+    favoriteShows[show.id] = true;
+    button.textContent = "★ Favorite";
+  }
+  localStorage.setItem("favoriteShows", JSON.stringify(favoriteShows));
+}
+
+function addSortByRatingControl() {
+  const sortSelect = document.createElement("select");
+  sortSelect.id = "sort-shows-option";
+  sortSelect.className = "search";
+
+  const optionName = document.createElement("option");
+  optionName.value = "name";
+  optionName.textContent = "Sort by Name";
+
+  const optionRating = document.createElement("option");
+  optionRating.value = "rating";
+  optionRating.textContent = "Sort by Rating";
+
+  sortSelect.appendChild(optionName);
+  sortSelect.appendChild(optionRating);
+
+  const searchControls = document.getElementById("search-controls");
+  if (searchControls) {
+    searchControls.appendChild(sortSelect);
+  }
+
+  sortSelect.addEventListener("change", (event) => {
+    const allShows = showCache.shows || [];
+    if (!allShows.length) return;
+
+    if (event.target.value === "rating") {
+      allShows.sort((a, b) => {
+        const ratingA = a.rating?.average || 0;
+        const ratingB = b.rating?.average || 0;
+        return ratingB - ratingA;
+      });
+    } else {
+      allShows.sort((a, b) => a.name.localeCompare(b.name));
+    }
+    renderShows(allShows);
+  });
 }
 
 function updateFrontShowSelector(shows) {
@@ -84,7 +147,7 @@ function updateFrontShowSelector(shows) {
   if (!frontSelector) return;
 
   frontSelector.innerHTML = "";
-  
+
   const defaultOption = document.createElement("option");
   defaultOption.value = "";
   defaultOption.textContent = "Select a Show";
@@ -93,7 +156,7 @@ function updateFrontShowSelector(shows) {
   shows.forEach((show) => {
     const option = document.createElement("option");
     option.value = show.id;
-    option.textContent = show.name; 
+    option.textContent = show.name;
     frontSelector.appendChild(option);
   });
 }
