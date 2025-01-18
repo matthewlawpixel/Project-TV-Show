@@ -1,57 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>TV Show Project</title>
-  <link href="style.css" rel="stylesheet" />
-  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
-  <select id="show-selector">
-    <option value="">Select a Show</option>
-  </select>
-
-  <input id="search-bar" type="text" placeholder="Search episodes..." />
-  
-  <select id="episode-selector">
-    <option value="">Show All Episodes</option>
-  </select>
-
-  <p id="results-count"></p>
-  <div id="root"></div>
-
+  <section id="shows-view">
+    <h1>TV Shows</h1>
+    <div id="search-controls">
+      <label for="shows-search-bar">Filtering for</label>
+      <input id="shows-search-bar" class="search" type="text" placeholder="Search shows by name, genre, summary..." />
+      <p id="shows-results-count"></p>
+      <select id="front-show-selector">
+        <option value="">Select a Show</option>
+      </select>
+    </div>
+    <div id="shows-container"></div>
+  </section>
+  <section id="episodes-view" style="display: none;">
+    <h1>TV Shows</h1>
+    <div id="episodes-controls">
+      <select id="show-selector">
+        <option value="">Select a Show</option>
+      </select>
+      <input id="search-bar" class="search" type="text" placeholder="Search episodes..." />
+      <select id="episode-selector">
+        <option value="">Show All Episodes</option>
+      </select>
+      <button id="back-to-shows-btn">Back to Shows</button>
+    </div>
+    <p id="results-count"></p>
+    <div id="root"></div>
+  </section>
   <script src="script.js"></script>
 </body>
-
-
-  <body>
-   
-    <div class="search-container">
-      <input
-        type="text"
-        id="searchInput"
-        placeholder="Search episodes..."
-      />
-      <p id="episodeCount">0 episode(s) found</p>
-    </div>
-
-   
-    <div class="episode-selector-container">
-      <label for="episodeSelector">Jump to episode:</label>
-      <select id="episodeSelector">
-        <option value="">Select an episode</option>
-      </select>
-      <button id="showAllButton" style="display: none;">Show All Episodes</button>
-    </div>
-
-    <div id="root"></div>
-
-    <script src="episodes.js"></script>
-    <script src="script.js"></script>
-  </body>
-
 </html>
