@@ -1,85 +1,96 @@
 body {
-  font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-
-  background-color: #f8f9fa;
-  color: #343a40;
-
+  font-family: Arial, sans-serif;
   background-color: #121212;
   color: #ffffff;
-  line-height: 1.5;
-
 }
 
+select,
+#search-bar {
+  margin: 10px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #444;
+  border-radius: 4px;
+  background-color: #333;
+  color: #fff;
+}
+
+#search-bar {
+  width: 300px;
+}
 
 .episodes-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 20px;
   padding: 20px;
+}
+
+.episodes-container:has(.episode-card:only-child) {
+  display: flex;
   justify-content: center;
+  align-items: center;
+  height: 100vh;
+  max-width: 500px;
+  margin: 0 auto;
 }
 
 .episode-card {
-  background: white;
-  border: 1px solid #ced4da;
+  background-color: #1f1f1f;
+  border: 1px solid #333;
   border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-
-  text-align: center;
-  padding: 15px;
-  max-width: 400px;
-  margin: 0 auto;
-
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  color: #fff;
   flex: 1 1 calc(25% - 20px);
-  max-width: calc(25% - 20px);
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .episode-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
-
 }
 
 .episode-card img {
   width: 100%;
-  height: auto;
-  border-bottom: 1px solid #dee2e6;
-  max-height: 300px;
+  aspect-ratio: 16 / 9;
   object-fit: cover;
+  border-bottom: 1px solid #2a2a2a;
 }
 
-.episode-card h2 {
-  font-size: 20px;
-  margin: 10px 0;
+.episode-title {
+  font-size: 18px;
+  margin: 10px;
 }
 
 .episode-code {
   font-size: 14px;
-
-  color: #6c757d;
-
-  color: #b3b3b3;
-
+  margin: 10px;
+  color: #888;
 }
 
 .episode-summary {
+  margin: 10px;
   font-size: 14px;
-  margin: 10px 0;
-  color: #495057;
+  line-height: 1.5;
 }
 
-.episode-card a {
-  display: inline-block;
-  margin-top: 10px;
-  text-decoration: none;
-  color: #007bff;
+.episode-link {
+  display: block;
+  margin: 10px;
+  font-size: 16px;
   font-weight: bold;
+  color: #1db954;
+  text-decoration: none;
 }
 
-.episode-card a:hover {
+.episode-link:hover {
   text-decoration: underline;
+}
+
+#results-count {
+  margin: 10px;
+  font-size: 16px;
 }
